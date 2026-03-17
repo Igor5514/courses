@@ -25,6 +25,11 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function puppies(): HasMany
+    {
+        return $this->hasMany(Puppy::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
