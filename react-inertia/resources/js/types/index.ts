@@ -8,7 +8,7 @@ export type Puppy = {
   id: number;
   name: string;
   trait: string;
-  imageUrl: string;
+  image_url: string;
   likedBy: User["id"][];
 };
 
@@ -19,4 +19,5 @@ export type PuppyProps =  {
 export interface WelcomePageProps extends PageProps {
   auth: any;
   puppies: Puppy[];
+  canRegister: any;
 }

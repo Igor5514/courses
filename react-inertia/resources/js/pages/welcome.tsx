@@ -3,15 +3,12 @@ import { dashboard, login, register } from '@/routes';
 import Home from '../components/Home';
 import { Puppy, PuppyProps, WelcomePageProps } from '@/types';
 
-export default function Welcome({
-    canRegister = true,
-    
-}: {
-    canRegister?: boolean;
-}) {
-    const { auth, puppies } = usePage<WelcomePageProps>().props;
+export default function Welcome() {
+    const { auth, puppies, canRegister } = usePage<WelcomePageProps>().props;
+
     return (
         <>
+        
             <Head title="Welcome">
                 <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link

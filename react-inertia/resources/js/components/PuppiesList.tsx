@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import { type Puppy } from "../types";
 import { LikeToggle } from "./LikeToggle";
+import { puppies } from "@/data/puppies";
 
 export function PuppiesList({
   searchQuery,
@@ -31,6 +32,7 @@ type PuppyCardProps = {
 
 function PuppyCard({ puppy, setPuppies }: PuppyCardProps) {
   return (
+
     <li
       key={puppy.id}
       className="overflow-clip rounded-lg bg-white shadow-md ring ring-black/5 hover:-translate-y-0.5"
@@ -38,7 +40,7 @@ function PuppyCard({ puppy, setPuppies }: PuppyCardProps) {
       <img
         className="aspect-square object-cover"
         alt={puppy.name}
-        src={puppy.imageUrl}
+        src={puppy.image_url}
       />
       <div className="gap flex items-center justify-between p-4 text-sm">
         <div className="flex items-center gap-2">

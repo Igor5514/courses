@@ -29,6 +29,7 @@ export async function toggleLikedStatus(id: Puppy["id"]) {
         throw errorData;
     }
     const data = await response.json();
+
     return data;
 }
 
@@ -45,5 +46,6 @@ export async function createPuppy(formData: FormData) {
         throw errorData;
     }
     const data = await response.json();
+
     return data;
 }

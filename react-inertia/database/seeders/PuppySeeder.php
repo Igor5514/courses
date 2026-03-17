@@ -30,7 +30,7 @@ class PuppySeeder extends Seeder
                 'user_id' => $simon->id,
                 'name' => $puppy['name'],
                 'trait' => $puppy['trait'],
-                'image_url' => '/images/' . $puppy['image'],
+                'image_url' => asset('/images/' . $puppy['image']),
             ]);
         }
     

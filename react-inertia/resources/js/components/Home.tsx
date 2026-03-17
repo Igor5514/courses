@@ -22,12 +22,14 @@ export default function Home({puppies}: PuppyProps) {
         <PageWrapper>
         <Container>
             <Header />
+           
+            {/* <pre>{JSON.stringify(puppies, null,2)}</pre> */}
             
-            <pre>{JSON.stringify(puppies, null,2)}</pre>
-                    <div className="mt-24 grid gap-8 sm:grid-cols-2">
+            <div className="mt-24 grid gap-8 sm:grid-cols-2">
             <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
             <Shortlist puppies={puppies} setPuppies={setPuppies} />
         </div>
+  
         <PuppiesList
             puppies={puppies}
             setPuppies={setPuppies}
@@ -44,12 +46,3 @@ export default function Home({puppies}: PuppyProps) {
 
 const puppyPromise = getPuppies();
 
-function Main() {
-
-
-  return (
-    <main>
-
-    </main>
-  );
-}
