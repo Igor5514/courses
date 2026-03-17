@@ -1,7 +1,7 @@
 import { Puppy } from "../types";
 
 export async function getPuppies() {
-    const response = await fetch("http://react-from-scratch-api.test/api/puppies", {
+    const response = await fetch("http://localhost:8000/api/puppies", {
         headers: {
             accept: "application/json",
         },
@@ -10,8 +10,8 @@ export async function getPuppies() {
         const errorData = await response.json();
         throw errorData;
     }
-    const { data } = await response.json();
-    return data;
+    const puppies = await response.json();
+    return puppies;
 }
 
 export async function toggleLikedStatus(id: Puppy["id"]) {
@@ -28,7 +28,7 @@ export async function toggleLikedStatus(id: Puppy["id"]) {
         const errorData = await response.json();
         throw errorData;
     }
-    const { data } = await response.json();
+    const data = await response.json();
     return data;
 }
 

@@ -16,6 +16,7 @@ createServer((page) =>
                 `./pages/${name}.tsx`,
                 import.meta.glob('./pages/**/*.tsx'),
             ),
+            
         setup: ({ App, props }) => {
             return (
                 <TooltipProvider delayDuration={0}>

@@ -18,5 +18,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Simon',
             'email' => 'simon@example.com',
         ]);
+
+        $this->call(PuppySeeder::class);
     }
 }

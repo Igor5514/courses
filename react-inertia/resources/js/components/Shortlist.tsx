@@ -18,7 +18,6 @@ export function Shortlist({
       </h2>
       <ul className="mt-4 flex flex-wrap gap-4">
         {puppies
-          .filter((pup) => pup.likedBy.includes(1))
           .map((puppy) => (
             <li
               key={puppy.id}
