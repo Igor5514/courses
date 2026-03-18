@@ -1,15 +1,13 @@
 import {PageProps} from '@inertiajs/core';
-
-type User = {
-  id: number;
-};
+import { User } from './auth';
 
 export type Puppy = {
   id: number;
   name: string;
   trait: string;
   image_url: string;
-  likedBy: User["id"][];
+  user: Pick<User, "id" | "name">;
+  liked_by: User["id"][];
 };
 
 export type PuppyProps =  {

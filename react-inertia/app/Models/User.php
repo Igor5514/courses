@@ -30,6 +30,11 @@ class User extends Authenticatable
         return $this->hasMany(Puppy::class);
     }
 
+    public function likedPuppies(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\User;
+use  App\Models\Puppy;
+
 
 return new class extends Migration
 {
@@ -12,14 +14,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('puppies', function (Blueprint $table) {
+        Schema::create('puppy_user', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Puppy::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-            $table->string('name');
-            $table->string('trait');
-            $table->string('image_url');
-            $table->
             $table->timestamps();
+
+            $table->unique(['puppy_id', 'user_id'], 'puppy_user_unique');
         });
     }
 
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('puppies');
+        Schema::dropIfExists('puppy_user');
     }
 };

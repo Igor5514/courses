@@ -4,11 +4,11 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use Inertia\Inertia;
 use App\Models\Puppy;
-
+use App\Http\Resources\PuppyResource;
 
 Route::get('/',  function() {
     return Inertia::render('welcome', [
-        'puppies' => Puppy::all(),
+        'puppies' => PuppyResource::collection(Puppy::with(['user', 'liked_by'])->get()),
         'canRegister' => Route::has('register'),
     ]);
 })->name('home');

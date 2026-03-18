@@ -3,8 +3,7 @@ import { dashboard, login, register } from '@/routes';
 import Home from '../components/Home';
 import { Puppy, PuppyProps, WelcomePageProps } from '@/types';
 
-export default function Welcome() {
-    const { auth, puppies, canRegister } = usePage<WelcomePageProps>().props;
+export default function Welcome({ puppies, canRegister, auth } : WelcomePageProps) {
 
     return (
         <>

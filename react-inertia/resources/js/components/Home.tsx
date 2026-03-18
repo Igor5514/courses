@@ -17,18 +17,35 @@ export default function Home({puppies}: PuppyProps) {
     const [puppiesState, setPuppies] = useState<Puppy[]>(puppies);
     const [searchQuery, setSearchQuery] = useState("");
 
+    console.log("puppies: ", puppies)
 
     return (
         <PageWrapper>
         <Container>
             <Header />
-           
-            {/* <pre>{JSON.stringify(puppies, null,2)}</pre> */}
+
+
+                <pre>{JSON.stringify(puppies, null,2)}</pre>
+                
+                <ul className="mt-4 flex flex-wrap gap-4">
+                
+                    {puppies.map((puppy, key) => (
+                        <li key={key} className="bg-white p-6 ring ring-black/10 flex gap-2 ">
+                            <img src = {puppy.image_url}
+                                 alt={puppy.name}
+                                 className="size-24 rounded-full object-cover" />
+                            <div>
+                                <h2>{puppy.name}</h2>
+                                <p>Owned by {puppy.user.name}</p>
+                            </div>
+                            
+                        </li>
+                    ))}
+                </ul>
             
-            <div className="mt-24 grid gap-8 sm:grid-cols-2">
             <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
             <Shortlist puppies={puppies} setPuppies={setPuppies} />
-        </div>
+       
   
         <PuppiesList
             puppies={puppies}
