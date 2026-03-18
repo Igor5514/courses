@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Http\Models\Puppy;
+
 
 class User extends Authenticatable
 {
@@ -30,7 +33,7 @@ class User extends Authenticatable
         return $this->hasMany(Puppy::class);
     }
 
-    public function likedPuppies(): BelongsToMany
+    public function likedPuppies(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class);
     }

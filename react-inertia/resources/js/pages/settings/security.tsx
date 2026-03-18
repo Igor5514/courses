@@ -15,7 +15,7 @@ import AppLayout from '@/layouts/app-layout';
 import SettingsLayout from '@/layouts/settings/layout';
 import { edit } from '@/routes/security';
 import { disable, enable } from '@/routes/two-factor';
-import type { BreadcrumbItem } from '@/types';
+import type { BreadcrumbItem } from '@/types/navigation';
 
 type Props = {
     canManageTwoFactor?: boolean;

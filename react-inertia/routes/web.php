@@ -8,7 +8,7 @@ use App\Http\Resources\PuppyResource;
 
 Route::get('/',  function() {
     return Inertia::render('welcome', [
-        'puppies' => PuppyResource::collection(Puppy::with(['user', 'liked_by'])->get()),
+        'puppies' => PuppyResource::collection(Puppy::with(['user', 'likedBy'])->get()),
         'canRegister' => Route::has('register'),
     ]);
 })->name('home');

@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Puppy;
+use App\Models\User;
 
 class PuppyUserSeeder extends Seeder
 {
@@ -23,9 +25,8 @@ class PuppyUserSeeder extends Seeder
             [$puppyId, $userId] = $relationship;
 
             $puppy = Puppy::find($puppyId);
-            $user = User::find($userId);
 
-            if($puppy && $user){
+            if($puppy){
                 $puppy->users()->attach($userId);
             }
         }

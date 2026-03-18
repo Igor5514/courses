@@ -24,7 +24,6 @@ export default function Home({puppies}: PuppyProps) {
         <Container>
             <Header />
 
-
                 <pre>{JSON.stringify(puppies, null,2)}</pre>
                 
                 <ul className="mt-4 flex flex-wrap gap-4">
