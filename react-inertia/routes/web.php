@@ -20,7 +20,12 @@ Route::get('/api/puppies', function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::inertia('dashboard', 'dashboard')->name('dashboard');
+    Route::patch(
+        'puppies/{puppy}/liked', [PuppyController::class, 'toggleLikedStatus']
+    )->name('puppies.toggleLikedStatus');
+    
+
+    Route::inertia('home', 'welcome')->name('dashboard');
 });
 
 require __DIR__.'/settings.php';
