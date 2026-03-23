@@ -16,11 +16,42 @@ export type PuppyProps =  {
 
 export interface WelcomePageProps extends PageProps {
   auth: any;
-  puppies: Puppy[];
+  puppies: PaginatedResponse<Puppy>;
   canRegister: any;
+  filters: Filters;
 }
 
 export interface Filters {
   search? : string;
   [key: string] : unknown;
+}
+
+export interface PaginationLink {
+  url: string | null;
+  label: string;
+  active: boolean;
+}
+
+export interface PaginationMeta {
+  current_page: number;
+  from: number | null;
+  last_page: number;
+  links: PaginationLink;
+  path: string;
+  per_page: number;
+  to: number | null;
+  total: number;
+}
+
+export interface PaginationLinks {
+  first: string | null;
+  last: string | null;
+  prev: string | null;
+  next: string | null;
+}
+
+export interface PaginatedResponse<T> {
+  data: T[];
+  meta: PaginationMeta;
+  links: PaginationLinks;
 }

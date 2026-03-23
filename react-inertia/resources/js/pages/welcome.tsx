@@ -3,7 +3,7 @@ import Home from '../components/Home';
 import { WelcomePageProps } from '@/types';
 import Header from '@/components/welcome-page-components/Header';
 
-export default function Welcome({ puppies, canRegister, auth } : WelcomePageProps) {
+export default function Welcome({ puppies, canRegister, auth, filters } : WelcomePageProps) {
 
     return (
         <>
@@ -19,7 +19,7 @@ export default function Welcome({ puppies, canRegister, auth } : WelcomePageProp
                 <Header auth={auth} canRegister={canRegister} />
                 <div className="flex w-full items-center justify-center opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
                     <main className="flex w-full max-w-[335px] flex-col-reverse lg:max-w-4xl lg:flex-row">
-                        <Home puppies={puppies} auth={auth} />
+                        <Home puppies={puppies} auth={auth} filters={filters} />
                     </main>
                 </div>
                 <div className="hidden h-14.5 lg:block"></div>

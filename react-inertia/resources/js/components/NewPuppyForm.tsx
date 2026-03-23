@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { Puppy } from "../types";
+import { PaginatedResponse, Puppy } from "../types";
 import { useFormStatus } from "react-dom";
 import { createPuppy } from "../queries";
 import { ErrorBoundary } from "react-error-boundary";
@@ -8,7 +8,7 @@ export function NewPuppyForm({
   puppies,
   setPuppies,
 }: {
-  puppies: Puppy[];
+  puppies: PaginatedResponse<Puppy>;
   setPuppies: Dispatch<SetStateAction<Puppy[]>>;
 }) {
   return (
@@ -22,7 +22,7 @@ export function NewPuppyForm({
           action={async (formData: FormData) => {
             const response = await createPuppy(formData);
             if (response.data) {
-              setPuppies([...puppies, response.data]);
+              setPuppies([...puppies.data, response.data]);
             }
           }}
           className="mt-4 flex w-full flex-col items-start gap-4"

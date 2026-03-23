@@ -17,16 +17,14 @@ class PuppyController extends Controller
             'puppies' => PuppyResource::collection(
                 Puppy::query()
                 ->when($search, function($query, $search) {
-                    $query->where('name', 'like', "%{$search}")
-                          ->orwhere('trait', 'like', "%{$search}");
+                    $query->where('name', 'like', "%{$search}%")
+                          ->orWhere('trait', 'like', "%{$search}%");
                 })
-                ->with(['user', 'likedBy'])->get()
+                ->with(['user', 'likedBy'])->paginate(6)
             ),
             'filters' => [
                 'search' => $search
             ]
-
-            
         ]);
     }
 
