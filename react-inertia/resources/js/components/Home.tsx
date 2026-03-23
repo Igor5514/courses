@@ -5,15 +5,14 @@ import { Search } from "@/components/Search";
 import { Shortlist } from "@/components/Shortlist";
 import { PuppiesList } from "@/components/PuppiesList";
 import { NewPuppyForm } from "@/components/NewPuppyForm";
-
 import {  useState } from "react";
-import { Puppy } from "@/types";
+import { Puppy,Filters } from "@/types";
 import { getPuppies } from "@/queries";
+import { Filter } from "lucide-react";
 
 
-export default function Home({puppies, auth}: {puppies: Puppy[], auth: any}) {
+export default function Home({puppies, auth,filters}: {puppies: Puppy[], auth: any, filters : Filters }) {
     const [puppiesState, setPuppies] = useState<Puppy[]>(puppies);
-    const [searchQuery, setSearchQuery] = useState("");
 
     console.log("puppies: ", puppies)
 
@@ -24,10 +23,10 @@ export default function Home({puppies, auth}: {puppies: Puppy[], auth: any}) {
 
                 {/* <pre>{JSON.stringify(puppies, null,2)}</pre> */}
        
-            <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+            <Search filters={filters}/>
             {auth.user && <Shortlist puppies={puppies} />}
   
-        <PuppiesList puppies={puppies} searchQuery={searchQuery}/>
+        <PuppiesList puppies={puppies} />
         <NewPuppyForm puppies={puppies} setPuppies={setPuppies} />
         
         </Container>

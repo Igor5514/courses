@@ -19,3 +19,8 @@ export interface WelcomePageProps extends PageProps {
   puppies: Puppy[];
   canRegister: any;
 }
+
+export interface Filters {
+  search? : string;
+  [key: string] : unknown;
+}

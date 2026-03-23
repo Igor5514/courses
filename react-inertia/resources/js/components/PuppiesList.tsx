@@ -4,18 +4,13 @@ import { LikeToggle } from "./LikeToggle";
 import { puppies } from "@/data/puppies";
 
 export function PuppiesList({
-  searchQuery,
   puppies,
 }: {
-  searchQuery: string;
   puppies: Puppy[]; 
 }) {
   return (
     <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {puppies
-        .filter((pup) =>
-          pup.trait.toLowerCase().includes(searchQuery.toLowerCase()),
-        )
         .map((puppy) => (
           <PuppyCard key={puppy.id} puppy={puppy} />
         ))}
