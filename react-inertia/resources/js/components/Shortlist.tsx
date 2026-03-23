@@ -1,15 +1,19 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { Puppy } from "../types";
-import { Heart, Loader, LoaderCircle, X } from "lucide-react";
-import { toggleLikedStatus } from "../queries";
+import { Heart, LoaderCircle, X } from "lucide-react";
+import { router, usePage } from "@inertiajs/react";
+import { route } from "ziggy-js";
+import { useForm } from "@inertiajs/react";
+
 
 export function Shortlist({
   puppies,
-  setPuppies,
 }: {
   puppies: Puppy[];
-  setPuppies: Dispatch<SetStateAction<Puppy[]>>;
 }) {
+  const auth = (usePage().props).auth.user
+
+
   return (
     <div>
       <h2 className="flex items-center gap-2 font-medium">
@@ -18,6 +22,7 @@ export function Shortlist({
       </h2>
       <ul className="mt-4 flex flex-wrap gap-4">
         {puppies
+          .filter( puppies => puppies.liked_by.includes(auth?.id))
           .map((puppy) => (
             <li
               key={puppy.id}
@@ -31,7 +36,7 @@ export function Shortlist({
                 src={puppy.image_url}
               />
               <p className="px-3 text-sm text-slate-800">{puppy.name}</p>
-              <DeleteButton id={puppy.id} setPuppies={setPuppies} />
+              <DeleteButton id={puppy.id} />
             </li>
           ))}
       </ul>
@@ -41,32 +46,29 @@ export function Shortlist({
 
 function DeleteButton({
   id,
-  setPuppies,
 }: {
   id: Puppy["id"];
-  setPuppies: Dispatch<SetStateAction<Puppy[]>>;
 }) {
-  const [pending, setPending] = useState(false);
+const { processing, patch } = useForm();
+
   return (
-    <button
-      onClick={async () => {
-        setPending(true);
-        const updatedPuppy = await toggleLikedStatus(id);
-        setPuppies((prevPups) => {
-          return prevPups.map((existingPuppy) =>
-            existingPuppy.id === updatedPuppy.id ? updatedPuppy : existingPuppy,
-          );
-        });
-        setPending(false);
-      }}
-      className="group h-full border-l border-slate-100 px-2 hover:bg-slate-100"
-      disabled={pending}
-    >
-      {pending ? (
-        <LoaderCircle className="size-4 animate-spin stroke-slate-300" />
-      ) : (
-        <X className="size-4 stroke-slate-400 group-hover:stroke-red-400" />
-      )}
-    </button>
+    <form onSubmit={(e) => {
+      e.preventDefault();
+      patch(route('puppies.like', id), {
+        preserveScroll: true,
+      })
+    }}>  
+      <button
+        type="submit"
+        className="group h-full border-l border-slate-100 px-2 hover:bg-slate-100"
+        disabled={processing}
+      >
+        {processing ? (
+          <LoaderCircle className="size-4 animate-spin stroke-slate-300" />
+        ) : (
+          <X className="size-4 stroke-slate-400 group-hover:stroke-red-400" />
+        )}
+      </button>
+    </form>
   );
 }

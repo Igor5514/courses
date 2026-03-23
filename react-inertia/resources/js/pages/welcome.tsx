@@ -1,4 +1,4 @@
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
 import Home from '../components/Home';
 import { WelcomePageProps } from '@/types';
 import Header from '@/components/welcome-page-components/Header';

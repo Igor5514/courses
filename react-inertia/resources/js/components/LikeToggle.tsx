@@ -1,49 +1,48 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { Heart, LoaderCircle } from "lucide-react";
 import { Puppy } from "../types";
 import { toggleLikedStatus } from "../queries";
+ import { Link } from '@inertiajs/react';
+import {route}  from 'ziggy-js';
 import { usePage } from "@inertiajs/react";
+import clsx from "clsx";
+import  { useForm } from "@inertiajs/react";
+
 
 export function LikeToggle({
   puppy,
-  setPuppies,
 }: {
   puppy: Puppy;
-  setPuppies: Dispatch<SetStateAction<Puppy[]>>;
 }) {
-  const [pending, setPending] = useState(false);
   const auth = (usePage().props).auth.user
 
+  const {processing, patch} = useForm({});
+
   return (
-    <button
-      className={`group ${!auth ? 'cursor-not-allowed' : ''} `}
-      disabled={!auth}
-      onClick={async () => {
-        setPending(true);
-        const updatedPuppy = await toggleLikedStatus(puppy.id);
-        setPuppies((prevPups) => {
-          return prevPups.map((existingPuppy) =>
-            existingPuppy.id === updatedPuppy.id ? updatedPuppy : existingPuppy,
-          );
-        });
-        setPending(false);
-      }}
-    >
-      {pending ? (
-        <LoaderCircle className="animate-spin stroke-slate-300" />
-      ) : (
-      
-      <Heart
-          className={
-            puppy.liked_by.includes(1) && auth
+    <form className="h-full" 
+    onSubmit={(e) => {
+      e.preventDefault();
+      patch(route('puppies.like', puppy.id), {
+        preserveScroll: true,
+      })
+    }}>
+      <button type="submit" className={`group ${!auth ? 'cursor-not-allowed' : ''} `}
+      disabled={!auth || processing}>
+      {
+        processing ? (
+          <LoaderCircle className=" animate-spin stroke-slate-300" /> 
+        ) : (
+        <Heart
+          className={clsx(
+            puppy.liked_by.includes(auth?.id) && auth
               ? "fill-pink-500 stroke-none"
-              : "stroke-slate-200 group-hover:stroke-slate-300"
-          }
+              : "stroke-slate-200 group-hover:stroke-slate-300",
+
+          )}
         />
-      
-  
-        
-      )}
-    </button>
-  );
+        )
+      }
+      </button>
+    </form>
+      );
 }

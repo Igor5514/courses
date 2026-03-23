@@ -23,19 +23,12 @@ export default function Home({puppies, auth}: {puppies: Puppy[], auth: any}) {
             <Header />
 
                 {/* <pre>{JSON.stringify(puppies, null,2)}</pre> */}
-                
        
             <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-            {auth.user && <Shortlist puppies={puppies} setPuppies={setPuppies} />}
+            {auth.user && <Shortlist puppies={puppies} />}
   
-        <PuppiesList
-            puppies={puppies}
-            setPuppies={setPuppies}
-            searchQuery={searchQuery}
-        />
-
+        <PuppiesList puppies={puppies} searchQuery={searchQuery}/>
         <NewPuppyForm puppies={puppies} setPuppies={setPuppies} />
-            
         
         </Container>
         </PageWrapper>
