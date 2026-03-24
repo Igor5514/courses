@@ -1,6 +1,8 @@
 import { PaginatedResponse, PaginationLinks, PaginationMeta, Puppy } from "@/types"
 import { cn } from '@/lib/utils';
-import { Button } from "@headlessui/react";
+import { Button } from "@/components/ui/button";
+import { Link } from "@inertiajs/react"
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type PaginationProps = {
     meta: PaginationMeta;
@@ -13,10 +15,29 @@ export function Pagination(
 {
     return (
         <div className={cn('flex items-center justify-between', className)} >
-            {links.prev && 
-                <Button>{links.prev}</Button>
-            }
-
+            <div>
+                {links.prev && 
+                    <Button variant="ghost" asChild>
+                        <Link preserveScroll href={links.prev}>
+                            <ChevronLeft className="size-4" />
+                            <span>Previous</span>
+                        </Link>
+                    </Button>
+                }
+            </div>
+            <p className="text-sm font-medium">
+                page {meta.current_page} of {meta.last_page}
+            </p>
+            <div>
+                {links.next && 
+                    <Button variant="ghost" asChild>
+                        <Link preserveScroll href={links.next}>
+                            <span>Next</span>
+                            <ChevronRight className="size-4" />
+                        </Link>
+                    </Button>
+                }
+            </div>
         </div>
     );
 
