@@ -19,6 +19,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         'puppies/{puppy}/liked', [PuppyController::class, 'like']
     )->name('puppies.like');
     
+    Route::post(
+        'puppies', [PuppyController::class, 'store']
+    )->name('puppies.store');
 
     Route::inertia('home', 'welcome')->name('dashboard');
 });

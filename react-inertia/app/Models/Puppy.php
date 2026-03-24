@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-
+use App\Models\User;
 
 class Puppy extends Model
 {
@@ -22,4 +22,9 @@ class Puppy extends Model
         return $this->belongsToMany(User::class);
     }
 
+    protected $fillable = [
+        'name',
+        'trait',
+        'image_url',
+    ];
 }
