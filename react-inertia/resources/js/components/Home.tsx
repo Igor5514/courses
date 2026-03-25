@@ -11,21 +11,19 @@ import { getPuppies } from "@/queries";
 
 
 export default function Home(
-    {puppies, auth, filters, homeRef} : 
-    {puppies: PaginatedResponse<Puppy> , auth: any, filters: Filters, homeRef: React.RefObject<HTMLElement>}) 
+    {likedPuppies, puppies, auth,  filters, homeRef} : 
+    {likedPuppies: Puppy[], puppies: PaginatedResponse<Puppy> , auth: any, filters: Filters, homeRef: React.RefObject<HTMLElement>}) 
 {
     return (
         <PageWrapper>
-            <div>
 
-            </div>
         <Container >
             <Header />
 
                 {/* <pre>{JSON.stringify(puppies, null,2)}</pre> */}
-       
-            <Search filters={filters} />
-            {auth.user && <Shortlist puppies={puppies.data} />}
+                
+            <Search filters={filters} /> 
+            auth.user && <Shortlist likedPuppies={likedPuppies} />
     
             <PuppiesList puppies={puppies} />
             {auth.user && <NewPuppyForm homeRef={homeRef} />}

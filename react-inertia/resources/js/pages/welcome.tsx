@@ -4,7 +4,7 @@ import { WelcomePageProps } from '@/types';
 import Header from '@/components/welcome-page-components/Header';
 import { useRef } from 'react';
 
-export default function Welcome({ puppies, canRegister, auth, filters } : WelcomePageProps) {
+export default function Welcome({ likedPuppies,  puppies, canRegister, auth, filters } : WelcomePageProps) {
 
     const homeRef = useRef<HTMLElement>(null);
 
@@ -22,7 +22,7 @@ export default function Welcome({ puppies, canRegister, auth, filters } : Welcom
                 <Header auth={auth} canRegister={canRegister} />
                 <div className="flex w-full items-center justify-center opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
                     <main  ref={homeRef} className="flex w-full max-w-[335px] flex-col-reverse lg:max-w-4xl lg:flex-row scroll-mt-6">
-                        <Home puppies={puppies} auth={auth} filters={filters} homeRef={homeRef} />
+                        <Home likedPuppies={likedPuppies} puppies={puppies} auth={auth} filters={filters} homeRef={homeRef} />
                     </main>
                 </div>
                 <div className="hidden h-14.5 lg:block"></div>

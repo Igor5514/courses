@@ -36,7 +36,7 @@ class User extends Authenticatable
 
     public function likedPuppies(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(Puppy::class);
     }
 
     /**

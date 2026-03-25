@@ -19,6 +19,7 @@ export interface WelcomePageProps extends PageProps {
   puppies: PaginatedResponse<Puppy>;
   canRegister: any;
   filters: Filters;
+  likedPuppies: Puppy[];
 }
 
 export interface Filters {

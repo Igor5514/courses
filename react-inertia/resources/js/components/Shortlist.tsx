@@ -5,14 +5,14 @@ import { router, usePage } from "@inertiajs/react";
 import { route } from "ziggy-js";
 import { useForm } from "@inertiajs/react";
 
-
 export function Shortlist({
-  puppies,
+  likedPuppies,
 }: {
-  puppies: Puppy[];
+  likedPuppies: Puppy[];
 }) {
   const auth = (usePage().props).auth.user
-
+  const firstFivePuppies = likedPuppies.slice(0,5);
+  const extraPuppiesCount = likedPuppies.length - firstFivePuppies.length;
 
   return (
     <div>
@@ -21,9 +21,7 @@ export function Shortlist({
         <Heart className="fill-pink-500 stroke-pink-500" />
       </h2>
       <ul className="mt-4 flex flex-wrap gap-4">
-        {puppies
-          .filter( puppies => puppies.liked_by.includes(auth?.id))
-          .map((puppy) => (
+        {firstFivePuppies.map((puppy) => (
             <li
               key={puppy.id}
               className="relative flex items-center overflow-clip rounded-md bg-white shadow-sm ring ring-black/5 transition duration-100 starting:scale-0 starting:opacity-0"
@@ -39,6 +37,11 @@ export function Shortlist({
               <DeleteButton id={puppy.id} />
             </li>
           ))}
+          {extraPuppiesCount > 0 && (
+            <li className="text-sm text-slate-800 self-center">
+              +{extraPuppiesCount} more
+            </li>
+          )}
       </ul>
     </div>
   );

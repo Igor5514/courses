@@ -16,6 +16,7 @@ class PuppyController extends Controller
 
     public function index(Request $request) {
         $search = $request->search;
+        session()->flash('success', 'Welcome!');
 
         return Inertia::render('welcome', [
             'puppies' => PuppyResource::collection(
@@ -29,6 +30,9 @@ class PuppyController extends Controller
                 ->paginate(3)
                 ->withQueryString()
             ),
+            'likedPuppies' => $request->user() 
+                ? PuppyResource::collection($request->user()->likedPuppies)
+                : [],
             'filters' => [
                 'search' => $search
             ]
@@ -70,7 +74,7 @@ class PuppyController extends Controller
             'image_url' => $image_url,
         ]);
 
-        return back()->with('success', 'Puppy created successfully!');
+        return redirect()->route('home')->with('success', 'Puppy created successfully!');
         
     }
 }
