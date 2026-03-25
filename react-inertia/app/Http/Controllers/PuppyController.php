@@ -8,6 +8,7 @@ use App\Models\Puppy;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
 use Illuminate\Support\Str;
+use App\Actions\OptimizeImageWebpAction;
 
 class PuppyController extends Controller
 {
@@ -51,17 +52,10 @@ class PuppyController extends Controller
 
         if($request->hasFile('image')){
 
-            $image = Image::read($request->file('image'));
-            if($image->width() > 1000) {
-                $image->scale(width: 1000);
-            }
+            $optimized = OptimizeImageWebpAction::handle($request->file('image'));
 
-            $webpEncoded = $image->toWebp(quality: 95)->toString();
-
-            $fileName = Str::random() . '.webp';
-
-            $path = 'puppies/' . $fileName;
-            $stored = Storage::disk('public')->put($path, $webpEncoded);
+            $path = 'puppies/' . $optimized['fileName'];
+            $stored = Storage::disk('public')->put($path, $optimized['webpString']);
 
             if(!$stored){
                 return back()->withErrors(['image' => 'Failed to upload image']);

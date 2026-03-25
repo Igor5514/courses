@@ -1,7 +1,5 @@
-import { Dispatch, SetStateAction } from "react";
 import { PaginatedResponse, type Puppy } from "../types";
 import { LikeToggle } from "./LikeToggle";
-import { puppies } from "@/data/puppies";
 import { Pagination } from "./pagination";
 
 export function PuppiesList({
