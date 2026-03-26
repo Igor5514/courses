@@ -20,10 +20,9 @@ export default function Home(
         <Container >
             <Header />
 
-                {/* <pre>{JSON.stringify(puppies, null,2)}</pre> */}
-                
+                {/* <pre>{JSON.stringify(puppies, null,2)}</pre> */}               
             <Search filters={filters} /> 
-            auth.user && <Shortlist likedPuppies={likedPuppies} />
+            {auth.user && <Shortlist likedPuppies={likedPuppies} />}
     
             <PuppiesList puppies={puppies} />
             {auth.user && <NewPuppyForm homeRef={homeRef} />}

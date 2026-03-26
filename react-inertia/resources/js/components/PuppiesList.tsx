@@ -1,3 +1,4 @@
+import { usePage } from "@inertiajs/react";
 import { PaginatedResponse, type Puppy } from "../types";
 import { LikeToggle } from "./LikeToggle";
 import { Pagination } from "./pagination";
@@ -26,6 +27,8 @@ type PuppyCardProps = {
 };
 
 function PuppyCard({ puppy }: PuppyCardProps) {
+  const auth = usePage().props.auth.user
+  
   return (
 
     <li
@@ -33,7 +36,7 @@ function PuppyCard({ puppy }: PuppyCardProps) {
       className="relative overflow-clip rounded-lg bg-white shadow-md ring ring-black/5 hover:-translate-y-0.5"
     >
       <div className="absolute top-2 right-2">
-        <PuppyDelete puppy={puppy} />
+         { auth && puppy.can.delete && <PuppyDelete puppy={puppy} /> }
       </div>
       <img
         className="aspect-square object-cover"

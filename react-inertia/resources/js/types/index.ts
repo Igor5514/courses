@@ -8,6 +8,9 @@ export type Puppy = {
   image_url: string;
   user: Pick<User, "id" | "name">;
   liked_by: User["id"][];
+  can: {
+    delete: boolean;
+  }
 };
 
 export type PuppyProps =  {
