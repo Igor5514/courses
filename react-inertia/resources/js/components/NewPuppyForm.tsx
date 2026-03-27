@@ -1,9 +1,6 @@
 import { useRef } from "react";
-import { PaginatedResponse, Puppy } from "../types";
-import { useFormStatus } from "react-dom";
 import { useForm } from "@inertiajs/react";
 import { route } from "ziggy-js";
-import { error } from "console";
 
 export function NewPuppyForm({homeRef}: { homeRef: React.RefObject<HTMLElement>}) {
   const {post, setData, data, errors,reset, processing} = useForm({

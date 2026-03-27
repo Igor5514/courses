@@ -6,11 +6,8 @@ export function PageWrapper({ children } : {children: React.ReactNode}) {
   
   const { flash } = usePage().props;
 
-  useEffect(() => {
-    if (flash.success) {
-      toast.success(flash.success);
-    }
-  }, [flash.success]);
+  if(flash.success) toast.success(flash.success);
+  if(flash.error) toast.success(flash.error);
 
   return (
     <>
