@@ -10,6 +10,7 @@ export type Puppy = {
   liked_by: User["id"][];
   can: {
     delete: boolean;
+    update: boolean;
   }
 };
 
